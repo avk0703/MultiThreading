@@ -1,0 +1,60 @@
+/**
+ * @author Avni
+ *Clicker:Creates Threads and Runs the threads for 10 seconds each.
+ */
+class Clicker implements Runnable{
+	long click;
+	Thread t;
+	private volatile boolean running=true;
+	
+	Clicker(int p){
+		click=0;
+		t=new Thread(this);
+		t.setPriority(p);
+	}
+	
+	public void run(){
+		while(running){
+			click++;
+		}
+	}
+	public void stop(){
+		running=false;
+	}
+	public void start(){
+		t.start();
+	}
+}
+/**
+ * @author Avni
+ * {@link ThreadPriorityDemo}: Depicts the effect of Thread Priority on threads. 
+ *
+ */
+public class ThreadPriorityDemo {
+	public static void main(String args[]){
+		Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
+		Clicker hi=new Clicker(8);
+		Clicker lo=new Clicker(2);
+		
+		
+		lo.start();
+		hi.start();
+		try{
+			Thread.sleep(10000);
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		lo.stop();
+		hi.stop();
+		try {
+			hi.t.join();
+			lo.t.join();
+			} catch (InterruptedException e) {
+			System.out.println("InterruptedException caught");
+			}
+		
+		System.out.println("Lo:"+lo.click);
+		System.out.println("Hi:"+hi.click);
+	}
+}
