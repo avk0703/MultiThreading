@@ -1,0 +1,41 @@
+/**
+ * @author Avni
+ *ThreadDemo1:Creates Child Thread by extending Thread Class
+ */
+class ThreadDemo1 extends Thread{
+	ThreadDemo1(){
+		super("Thread Demo");
+		System.out.println("Child Thread:"+this);
+		start();
+	}
+	public void run(){
+		try{
+			for(int i=5;i>0;--i){
+				System.out.println("child thread:"+i);
+				sleep(500);
+			}
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		System.out.println("Child thread Exits");
+	}
+}
+/**
+ * @author Avni
+ *ChildThreadDemo2:Initiating ThreadDemo1 and initiating Main Thread implicitly.
+ */
+public class ChildThreadDemo2 {
+	public static void main(String args[]){
+		new ThreadDemo1();
+		try{
+			for(int i=5;i>0;--i){
+				System.out.println("Main thread:"+i);
+				Thread.sleep(1000);	
+		}
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+	}
+}
