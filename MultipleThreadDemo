@@ -1,0 +1,42 @@
+ /**
+ * @author Avni
+ *MultiThread:Creating Multiple Child Threads by implementing interface Runnable.
+ */
+class MultiThread implements Runnable{
+	Thread t;
+	String f;
+	MultiThread(String s){
+		f=s;
+		t=new Thread(this,s);
+		System.out.println("Thread :"+t);
+		t.start();
+	}
+	public void run(){
+		try{
+			for(int i=5;i>0;--i){
+				System.out.println(f+":"+i);
+				Thread.sleep(500);
+			}
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+	}
+}
+/**
+ * @author Avni
+ *MultipleThreadDemo:Initiating MultiThread.
+ */
+public class MultipleThreadDemo {
+	public static void main(String args[]){
+		new MultiThread("One");
+		new MultiThread("Two");
+		new MultiThread("Three");
+		try{
+			Thread.sleep(100);
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+	}
+}
